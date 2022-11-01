@@ -2,14 +2,16 @@ extends KinematicBody2D
 
 onready var SM = $StateMachine
 
-var health = 25
+var health = 45
 var defense = 5
 var velocity = Vector2.ZERO
 var jump_power = Vector2.ZERO
 var direction = 1
 var isAttacking = false
-var damage = 5
+var damage = 15
 var coin = 0
+var recovermore = false
+var statmore = false
 
 export var gravity = Vector2(0,30)
 
@@ -41,6 +43,7 @@ func _physics_process(_delta):
 	
 	if Input.is_action_pressed("attack"):
 		$AnimatedSprite.play("Attacking")
+		$AudioStreamPlayer2D.play()
 		isAttacking = true
 		
 	if Input.is_action_just_pressed("attack"):
@@ -55,10 +58,23 @@ func _physics_process(_delta):
 	
 	if coin != Global.coin:
 		if Global.Buff_1_1_A == true:
-			defense += 5
+			defense += 1
 		if Global.Buff_1_2_A == true:
-			damage += 3
-		health += 5
+			damage += 1
+		if Global.Buff_2_1_A == true:
+			recovermore = true
+		if Global.Buff_2_2_A == true:
+			statmore = true
+		if Global.Buff_3_1_A == true:
+			damage += (Global.items_collected / 6)
+		if Global.Buff_3_2_A == true:
+			health += 5
+		else:
+			health += 2
+		if Global.Buff_4_1_A == true:
+			move_speed += (Global.items_collected / 4)
+		if Global.Buff_4_2_A == true:
+			damage += (move_speed / 4)
 		coin += 1
 	
 
@@ -126,13 +142,22 @@ func do_damage(d):
 		queue_free()
 
 func heal(h):
-	health += h
+	if recovermore == true:
+		health += (h * 2)
+	else: 
+		health += h
 
 func abuff(a):
-	damage += a
+	if statmore == true:
+		damage += (a * 2)
+	else:
+		damage += a
 	
 func dbuff(d):
-	defense += d
+	if statmore == true:
+		defense += (d * 2)
+	else:
+		defense += d
 
 func die():
 	Global.player = null

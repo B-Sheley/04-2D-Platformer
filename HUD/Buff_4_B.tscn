@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HUD/Buff_4_B.gd" type="Script" id=1]
+[ext_resource path="res://music/Hud_Music.tscn" type="PackedScene" id=2]
+
+[node name="Buff_4_B" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_right = 50.0
+margin_bottom = 100.0
+text = "Select a Buff"
+align = 1
+valign = 1
+
+[node name="Buff_4_1_B" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -100.0
+margin_right = 100.0
+text = "Recover hp when under half health and taking damage"
+
+[node name="Buff_4_2_B" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -271.0
+margin_top = -100.0
+text = "Increase damage when you take damage"
+
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 2 )]
+
+[connection signal="pressed" from="Buff_4_1_B" to="." method="_on_Buff_4_1_B_pressed"]
+[connection signal="pressed" from="Buff_4_2_B" to="." method="_on_Buff_4_2_B_pressed"]

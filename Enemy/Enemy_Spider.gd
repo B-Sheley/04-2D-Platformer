@@ -5,6 +5,8 @@ export var constraint_right = Vector2(100,0)
 export var speed = 5
 var dmg = 10
 var health = 10
+var defense = 5
+var score = 5
 
 
 func _physics_process(_delta):
@@ -23,8 +25,12 @@ func _on_Area2D_body_entered(body):
 		body.do_damage(dmg)
 
 func hp(d):
+	d -= defense
+	if d <= 0:
+		d = 1
 	health -= d
 	if health <= 0:
 		Global.increase_kill(1)
+		Global.increase_score(score)
 		queue_free()
 		

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/knifeSlice.ogg-463b0818b7f82e71487eb6f732f39a6c.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -2,14 +2,18 @@ extends KinematicBody2D
 
 onready var SM = $StateMachine
 
-var health = 50
+var health = 80
 var defense = 15
 var velocity = Vector2.ZERO
 var jump_power = Vector2.ZERO
 var direction = 1
 var isAttacking = false
-var damage = 15
+var damage = 25
 var rage = 5
+var live1 = false
+var live1_use = false
+var hdmg = false
+var hdmg_use = false
 
 export var gravity = Vector2(0,30)
 
@@ -41,6 +45,7 @@ func _physics_process(_delta):
 		
 	if Input.is_action_pressed("attack"):
 		$AnimatedSprite.play("Attacking")
+		$AudioStreamPlayer2D.play()
 		isAttacking = true
 		
 	if Input.is_action_just_pressed("attack"):
@@ -55,11 +60,33 @@ func _physics_process(_delta):
 	
 	if rage != Global.health:
 		if Global.Buff_1_1_B == true:
-			defense += 5
+			defense += 7.5
 		if Global.Buff_1_2_B == true:
-			health += 5
-		damage += 5
-		rage -= 1
+			health += 7.5
+		if Global.Buff_2_1_B == true:
+			live1 = true
+		if Global.Buff_2_2_B == true:
+			move_speed += 6
+			jump_speed += 6
+			leap_speed += 6
+		if Global.Buff_3_2_B == true:
+			damage += 20
+			rage -= 1
+		else:
+			damage += 10
+			rage -= 1
+		
+		if Global.Buff_3_1_B == true and health <= (health/2):
+			hdmg = true
+		else:
+			hdmg = false
+			hdmg_use = false
+		
+		if hdmg == true and hdmg_use == false:
+			damage += 15
+			hdmg_use = true
+			
+			
 
 
 func is_moving():
@@ -120,11 +147,18 @@ func do_damage(d):
 	if d <= 0:
 		d = 1
 	health -= d
-	print(health)
+	if health <= (health/2) and Global.Buff_4_1_B == true:
+		health += 3
+	if Global.Buff_4_2_B == true:
+		damage += 3
 	if health <= 0:
-		Global.health -= 1
-		Global.player = null
-		queue_free()
+		if live1 == true and live1_use == false:
+			health = 1
+			live1_use = true
+		else: 
+			Global.health -= 1
+			Global.player = null
+			queue_free()
 
 func heal(h):
 	health += h

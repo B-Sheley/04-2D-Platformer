@@ -9,5 +9,6 @@ func _ready():
 
 
 func _on_Button_pressed():
+	Global.reset()
 	var _scene = get_tree().change_scene("res://HUD/Start.tscn")
 

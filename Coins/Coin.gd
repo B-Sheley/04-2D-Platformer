@@ -9,4 +9,5 @@ func _on_Coin_body_entered(body):
 	if body.name == "Player":
 		Global.increase_score(score)
 		Global.increase_coin(1)
+		Global.items_collected += 1
 		queue_free()

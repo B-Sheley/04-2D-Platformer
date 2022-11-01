@@ -5,7 +5,8 @@ export var constraint_right = Vector2(100,0)
 export var speed = 10
 var dmg = 5
 var health = 15
-
+var defense = 5
+var score = 5
 
 func _physics_process(_delta):
 	if not $Tween.is_active():
@@ -18,9 +19,13 @@ func _physics_process(_delta):
 		$Tween.start()
 		
 func hp(d):
+	d -= defense
+	if d <= 0:
+		d = 1
 	health -= d
 	if health <= 0:
 		Global.increase_kill(1)
+		Global.increase_score(score)
 		queue_free()
 
 func _on_Area2D_body_entered(body):

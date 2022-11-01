@@ -5,6 +5,8 @@ export var speed = 75
 export var look_speed = 125
 export var dmg = 15
 var health = 20
+var defense = 10
+var score = 10
 
 func _physics_process(_delta):
 	if Global.player == null:
@@ -25,7 +27,11 @@ func _on_Area2D_body_entered(body):
 		body.do_damage(dmg)
 
 func hp(d):
+	d -= defense
+	if d <= 0:
+		d = 1
 	health -= d
 	if health <= 0:
 		Global.increase_kill(1)
+		Global.increase_score(score)
 		queue_free()
