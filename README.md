@@ -9,17 +9,17 @@ A game made for a 2D Platformer project for a Game Technology class.
 In this game there are 4 levels and a boss level. Before starting the game choose from one of 3 classes. The raging Barbarian who grows stronger as the player loses lives. The quick Adventurer who grows stronger as the player collects coins and items. Or the heavy armored Knight who grows stronger as the player kills enemies. After each level the player will be given a choice from two buffs to select to apply to their character, based on the class they chose. Through this a player can play multiple times with none of those times being the exact same. How will you play?
 
 ## Implementation
-Class selection
-Buff Selections
-Ability for the player to attack enemies
-Multiple Levels + Boss Level
-Multiple Enemies
-Stats for both player and enemies
-Background music for start,selection,end game screens and a different music for each level
-Sound effect for player attacking
-Score that increases as player collects coins, items and kills enemies
-Second scoring that tracks how many coins and kills the player got
-Ability to replay if the player dies or completes the game
+- Class selection
+- Buff Selections
+- Ability for the player to attack enemies
+- Multiple Levels + Boss Level
+- Multiple Enemies
+- Stats for both player and enemies
+- Background music for start,selection,end game screens and a different music for each level
+- Sound effect for player attacking
+- Score that increases as player collects coins, items and kills enemies
+- Second scoring that tracks how many coins and kills the player got
+- Ability to replay if the player dies or completes the game
 
 ## References
 Sprites and base code for the Player Character pulled from https://github.com/BL-MSCH-C220-F22/2D-Platformer-Character 
